@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plano Semanal - Espaço Libelinha</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Instruções iniciais -->
+  <div class="instructions">
+    <h3>✨ Como usar (muito fácil!)</h3>
+    <ol>
+      <li>Selecione a <strong>Segunda-feira</strong> no calendário</li>
+      <li>Preencha <strong>Turma, Tema e Subtema</strong></li>
+      <li>Digite as atividades de cada dia (uma embaixo da outra)</li>
+      <li>No final, toque no botão <strong>VERMELHO</strong> para gerar o PDF</li>
+    </ol>
+  </div>
+
+  <!-- Cabeçalho -->
+  <div class="header">
+    <h1>ESPAÇO LIBELINHA</h1>
+    <h2>Plano Semanal de Atividades</h2>
+  </div>
+
+  <!-- Informações básicas -->
+  <div class="info-box">
+    <div class="info-item">
+      <label>📅 Selecione a Segunda-feira</label>
+      <input type="date" id="data-segunda">
+    </div>
+    
+    <div class="info-item">
+      <label>👶 Turma</label>
+      <input type="text" id="turma" placeholder="Ex: 1 ano / 2 anos" value="1 ano / 2 anos">
+    </div>
+    
+    <div class="info-item">
+      <label>🎨 Tema</label>
+      <input type="text" id="tema" placeholder="Ex: Chegou o Natal" value="Chegou o Natal">
+    </div>
+    
+    <div class="info-item">
+      <label>✏️ Subtema</label>
+      <input type="text" id="subtema" placeholder="Ex: Escrever a carta para o pai natal" value="Escrever a carta para o pai natal">
+    </div>
+  </div>
+
+  <!-- Datas da Semana -->
+  <div class="info-item">
+    <label>📅 Datas da Semana</label>
+    <div class="week-dates">
+      <div>
+        <small>Seg</small>
+        <input type="text" id="seg-data-input" readonly>
+      </div>
+      <div>
+        <small>Ter</small>
+        <input type="text" id="ter-data-input" readonly>
+      </div>
+      <div>
+        <small>Qua</small>
+        <input type="text" id="qua-data-input" readonly>
+      </div>
+      <div>
+        <small>Qui</small>
+        <input type="text" id="qui-data-input" readonly>
+      </div>
+      <div>
+        <small>Sex</small>
+        <input type="text" id="sex-data-input" readonly>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela de atividades (com dias e datas integradas) -->
+  <div class="activities-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Segunda-feira</th>
+          <th>Terça-feira</th>
+          <th>Quarta-feira</th>
+          <th>Quinta-feira</th>
+          <th>Sexta-feira</th>
+        </tr>
+        <tr>
+          <th id="seg-data-header">08/12</th>
+          <th id="ter-data-header">09/12</th>
+          <th id="qua-data-header">10/12</th>
+          <th id="qui-data-header">11/12</th>
+          <th id="sex-data-header">12/12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Segunda</div></td>
+          <td><div class="activity-item" contenteditable="true">Acolhimento</div></td>
+          <td><div class="activity-item" contenteditable="true">Acolhimento</div></td>
+          <td><div class="activity-item" contenteditable="true">Acolhimento</div></td>
+          <td><div class="activity-item" contenteditable="true">Acolhimento</div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Exploração da história Uma Prenda de Natal: Salta Letrinhas.</div></td>
+          <td><div class="activity-item" contenteditable="true">Atividade sensorial</div></td>
+          <td><div class="activity-item" contenteditable="true">Elaboração da nossa carta para o Pai Natal.</div></td>
+          <td><div class="activity-item" contenteditable="true">Vamos confeccionar as rabanadas de Natal.</div></td>
+          <td><div class="activity-item" contenteditable="true">Almoço</div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Educação física</div></td>
+          <td><div class="activity-item" contenteditable="true">Almoço</div></td>
+          <td><div class="activity-item" contenteditable="true">Almoço</div></td>
+          <td><div class="activity-item" contenteditable="true">Almoço</div></td>
+          <td><div class="activity-item" contenteditable="true">Sesta</div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Faz de conta</div></td>
+          <td><div class="activity-item" contenteditable="true">Sesta</div></td>
+          <td><div class="activity-item" contenteditable="true">Sesta</div></td>
+          <td><div class="activity-item" contenteditable="true">Sesta</div></td>
+          <td><div class="activity-item" contenteditable="true">Lanche</div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Atividade sensorial</div></td>
+          <td><div class="activity-item" contenteditable="true">Lanche</div></td>
+          <td><div class="activity-item" contenteditable="true">Lanche</div></td>
+          <td><div class="activity-item" contenteditable="true">Lanche</div></td>
+          <td><div class="activity-item" contenteditable="true">Ensaio para a Festa de Natal</div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Motricidade fina</div></td>
+          <td><div class="activity-item" contenteditable="true">Ensaio para a Festa de Natal</div></td>
+          <td><div class="activity-item" contenteditable="true">Ensaio para a Festa de Natal</div></td>
+          <td><div class="activity-item" contenteditable="true">Ensaio para a Festa de Natal</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Natação</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Almoço</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Sesta</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Lanche</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+        <tr>
+          <td><div class="activity-item" contenteditable="true">Ensaio para a Festa de Natal</div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+          <td><div class="activity-item" contenteditable="true"></div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="add-activity" onclick="adicionarAtividade()">
+      ➕ Adicionar mais uma atividade
+    </button>
+  </div>
+
+  <!-- Botão principal -->
+  <button class="btn-print" onclick="gerarPDF()">📄 GERAR PDF AGORA</button>
+
+  <div class="footer">
+    <p>Espaço Libelinha • Plano Semanal</p>
+    <p>Os dados são salvos automaticamente neste celular</p>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">Carregando...</div>
+
+  <!-- Preview -->
+  <div id="preview"></div>
+  <!-- Botão para acessar a Ementa -->
+<div style="text-align: center; margin: 15px 0;">
+  <button onclick="window.location.href='ementa.html'" style="padding: 14px 30px; background: #4ab4c2; color: white; border: none; border-radius: 14px; font-weight: bold; font-size: 18px; cursor: pointer; box-shadow: 0 4px 12px rgba(74, 180, 194, 0.4);">
+    🍽️ Acessar Ementa Semanal
+  </button>
+</div>
+
+  <script>
+    // Atualizar datas automaticamente
+    document.getElementById('data-segunda').addEventListener('input', atualizarTodasDatas);
+
+    function atualizarTodasDatas() {
+      const dataSegunda = document.getElementById('data-segunda').value;
+      if (!dataSegunda) return;
+      
+      const segunda = new Date(dataSegunda);
+      const datas = [];
+      
+      for (let i = 0; i < 5; i++) {
+        const dia = new Date(segunda);
+        dia.setDate(segunda.getDate() + i);
+        const d = dia.getDate().toString().padStart(2, '0');
+        const m = (dia.getMonth() + 1).toString().padStart(2, '0');
+        datas.push(`${d}/${m}`);
+      }
+      
+      // Atualizar inputs das datas
+      document.getElementById('seg-data-input').value = datas[0];
+      document.getElementById('ter-data-input').value = datas[1];
+      document.getElementById('qua-data-input').value = datas[2];
+      document.getElementById('qui-data-input').value = datas[3];
+      document.getElementById('sex-data-input').value = datas[4];
+      
+      // Atualizar cabeçalhos da tabela
+      document.getElementById('seg-data-header').textContent = datas[0];
+      document.getElementById('ter-data-header').textContent = datas[1];
+      document.getElementById('qua-data-header').textContent = datas[2];
+      document.getElementById('qui-data-header').textContent = datas[3];
+      document.getElementById('sex-data-header').textContent = datas[4];
+    }
+
+    // Adicionar atividade
+    function adicionarAtividade() {
+      const tbody = document.querySelector('.activities-table tbody');
+      const novaLinha = document.createElement('tr');
+      
+      for (let i = 0; i < 5; i++) {
+        const td = document.createElement('td');
+        const div = document.createElement('div');
+        div.className = 'activity-item';
+        div.contentEditable = 'true';
+        td.appendChild(div);
+        novaLinha.appendChild(td);
+      }
+      
+      tbody.appendChild(novaLinha);
+      mostrarToast('✅ Atividade adicionada!', 'success');
+      
+      // Focar na primeira célula da nova linha
+      setTimeout(() => {
+        novaLinha.querySelector('.activity-item').focus();
+      }, 100);
+    }
+
+    // Foco automático (Enter = próxima célula)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && e.target.classList.contains('activity-item')) {
+        e.preventDefault();
+        
+        const currentCell = e.target.closest('td');
+        const currentRow = currentCell.closest('tr');
+        const allCells = Array.from(document.querySelectorAll('.activities-table tbody td'));
+        
+        const currentIndex = allCells.indexOf(currentCell);
+        const nextIndex = currentIndex + 1;
+        
+        if (nextIndex < allCells.length) {
+          const nextCell = allCells[nextIndex];
+          nextCell.querySelector('.activity-item').focus();
+        }
+      }
+    });
+
+    // Toast
+    function mostrarToast(mensagem, tipo = '') {
+      const toast = document.getElementById('toast');
+      toast.textContent = mensagem;
+      toast.className = 'toast' + (tipo ? ' ' + tipo : '');
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Salvar automático
+    function salvarAutomatico() {
+      const dados = {
+        dataSegunda: document.getElementById('data-segunda').value,
+        turma: document.getElementById('turma').value,
+        tema: document.getElementById('tema').value,
+        subtema: document.getElementById('subtema').value,
+        atividades: []
+      };
+      
+      const rows = document.querySelectorAll('.activities-table tbody tr');
+      rows.forEach(row => {
+        const atividades = Array.from(row.querySelectorAll('.activity-item'))
+          .map(el => el.textContent.trim())
+          .filter(texto => texto && texto !== '\n' && texto !== '');
+        dados.atividades.push(atividades);
+      });
+      
+      localStorage.setItem('libelinha_dados', JSON.stringify(dados));
+    }
+
+    // Carregar salvos
+    function carregarSalvos() {
+      const salvos = localStorage.getItem('libelinha_dados');
+      if (salvos) {
+        try {
+          const dados = JSON.parse(salvos);
+          
+          document.getElementById('data-segunda').value = dados.dataSegunda || '';
+          document.getElementById('turma').value = dados.turma || '1 ano / 2 anos';
+          document.getElementById('tema').value = dados.tema || 'Chegou o Natal';
+          document.getElementById('subtema').value = dados.subtema || 'Escrever a carta para o pai natal';
+          
+          if (dados.dataSegunda) atualizarTodasDatas();
+          
+          if (dados.atividades && dados.atividades.length > 0) {
+            const tbody = document.querySelector('.activities-table tbody');
+            tbody.innerHTML = '';
+            
+            dados.atividades.forEach(atividades => {
+              const novaLinha = document.createElement('tr');
+              
+              for (let i = 0; i < 5; i++) {
+                const td = document.createElement('td');
+                const div = document.createElement('div');
+                div.className = 'activity-item';
+                div.contentEditable = 'true';
+                div.textContent = atividades[i] || '';
+                td.appendChild(div);
+                novaLinha.appendChild(td);
+              }
+              
+              tbody.appendChild(novaLinha);
+            });
+          }
+          
+          mostrarToast('✅ Dados carregados!', 'success');
+        } catch (e) {
+          console.error('Erro ao carregar:', e);
+        }
+      }
+    }
+
+    // Gerar PDF
+    function gerarPDF() {
+      const dataSegunda = document.getElementById('data-segunda').value;
+      if (!dataSegunda) {
+        mostrarToast('⚠️ Selecione a segunda-feira!', 'error');
+        return;
+      }
+      
+      mostrarToast('🖨️ Gerando PDF... Aguarde', 'success');
+      
+      const segunda = new Date(dataSegunda);
+      const sexta = new Date(segunda);
+      sexta.setDate(segunda.getDate() + 4);
+      
+      const diaInicio = segunda.getDate();
+      const diaFim = sexta.getDate();
+      const mes = segunda.toLocaleString('pt-BR', { month: 'long' });
+      const ano = segunda.getFullYear();
+      
+      const atividades = [];
+      const rows = document.querySelectorAll('.activities-table tbody tr');
+      rows.forEach(row => {
+        const atividadesDia = Array.from(row.querySelectorAll('.activity-item'))
+          .map(el => el.textContent.trim())
+          .filter(texto => texto && texto !== '\n' && texto !== '');
+        atividades.push(atividadesDia);
+      });
+      
+      const datas = [
+        document.getElementById('seg-data-input').value,
+        document.getElementById('ter-data-input').value,
+        document.getElementById('qua-data-input').value,
+        document.getElementById('qui-data-input').value,
+        document.getElementById('sex-data-input').value
+      ];
+      
+      const preview = document.getElementById('preview');
+      preview.innerHTML = `
+        <div style="max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border: 3px solid #4ab4c2; border-radius: 8px; font-family: Arial, sans-serif;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h1 style="color: #ed7a7f; font-size: 28px; font-weight: bold; letter-spacing: 1px; margin: 0;">ESPAÇO LIBELINHA</h1>
+            <h2 style="color: #4ab4c2; font-size: 20px; font-weight: bold; margin: 8px 0 0 0;">Plano Semanal de Atividades</h2>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; font-size: 15px;">
+            <div><strong>Semana:</strong> ${diaInicio} a ${diaFim} de ${mes} de ${ano}</div>
+            <div><strong>Turma:</strong> ${document.getElementById('turma').value}</div>
+            <div><strong>Tema:</strong> ${document.getElementById('tema').value}</div>
+            <div><strong>Subtema:</strong> ${document.getElementById('subtema').value}</div>
+          </div>
+          
+          <table style="width:100%; border-collapse:collapse; table-layout:fixed; border:2px solid #4ab4c2; font-size:13px;">
+            <thead>
+              <tr>
+                <th style="background:#4ab4c2; color:white; padding:8px; border:1px solid #2a9dbf; font-weight:bold; text-align:center; font-size:14px;">Segunda<br>${datas[0]}</th>
+                <th style="background:#4ab4c2; color:white; padding:8px; border:1px solid #2a9dbf; font-weight:bold; text-align:center; font-size:14px;">Terça<br>${datas[1]}</th>
+                <th style="background:#4ab4c2; color:white; padding:8px; border:1px solid #2a9dbf; font-weight:bold; text-align:center; font-size:14px;">Quarta<br>${datas[2]}</th>
+                <th style="background:#4ab4c2; color:white; padding:8px; border:1px solid #2a9dbf; font-weight:bold; text-align:center; font-size:14px;">Quinta<br>${datas[3]}</th>
+                <th style="background:#4ab4c2; color:white; padding:8px; border:1px solid #2a9dbf; font-weight:bold; text-align:center; font-size:14px;">Sexta<br>${datas[4]}</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${atividades.map((ativ, rowIndex) => `
+                <tr>
+                  ${ativ.map((a, colIndex) => `
+                    <td style="border:1px solid #4ab4c2; padding:6px; vertical-align:top; min-height:40px; text-align:left; font-size:12px; line-height:1.5;">
+                      ${a || '&nbsp;'}
+                    </td>
+                  `).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+      
+      preview.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        html2canvas(preview, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          windowWidth: 1000,
+          windowHeight: preview.scrollHeight,
+          letterRendering: true
+        }).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const { jsPDF } = window.jspdf;
+          const pdf = new jsPDF('landscape', 'mm', 'a4');
+          
+          const imgWidth = 297;
+          const pageHeight = 210;
+          const imgHeight = canvas.height * imgWidth / canvas.width;
+          
+          const y = (pageHeight - imgHeight) / 2;
+          pdf.addImage(imgData, 'PNG', 0, y > 0 ? y : 10, imgWidth, imgHeight);
+          
+          const nome = `${diaInicio.toString().padStart(2, '0')}${(segunda.getMonth() + 1).toString().padStart(2, '0')}`;
+          pdf.save(`Plano_Libelinha_${nome}.pdf`);
+          
+          preview.style.display = 'none';
+          document.body.style.overflow = 'auto';
+          mostrarToast('✅ PDF pronto!', 'success');
+          
+        }).catch(error => {
+          console.error('Erro PDF:', error);
+          preview.style.display = 'none';
+          document.body.style.overflow = 'auto';
+          mostrarToast('❌ Erro ao gerar PDF', 'error');
+        });
+      }, 500);
+    }
+
+    // Inicializar
+    window.onload = function() {
+      carregarSalvos();
+      
+      if (!localStorage.getItem('libelinha_dados')) {
+        const hoje = new Date();
+        const diaSemana = hoje.getDay();
+        const diff = (diaSemana === 0 ? -6 : 1 - diaSemana);
+        
+        const segunda = new Date(hoje);
+        segunda.setDate(hoje.getDate() + diff);
+        
+        document.getElementById('data-segunda').value = segunda.toISOString().split('T')[0];
+        atualizarTodasDatas();
+      } else if (document.getElementById('data-segunda').value) {
+        atualizarTodasDatas();
+      }
+      
+      setInterval(salvarAutomatico, 15000);
+    };
+  </script>
+</body>
+</html>
